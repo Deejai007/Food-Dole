@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./DonarLoginSignup.css";
 import { toast } from "react-toastify";
+import axios from "axios";
+
 const DonarLogin = () => {
   const navigate = useNavigate();
   setTimeout(() => {
@@ -21,12 +23,15 @@ const DonarLogin = () => {
     document.getElementById("loginform").style.display = "block";
     document.getElementById("btn").style.left = "110px";
   }
-  const [full_name, setfull_name] = useState("");
+  // ~~~~~~~~Signup Creds
+  const [full_name, setFull_name] = useState("");
   const [phone_number, setPhone_number] = useState("");
-  const [username, setUsername] = useState("");
-  const [email, setemail] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
   const [pass, setPass] = useState("");
-  const [cpass, setcpass] = useState("");
+  const [cpass, setCpass] = useState("");
+  // ~~~~~~~~Login Creds
   const [creds, setCreds] = useState({ email: "", password: "" });
   const HandleDLogin = async (e) => {
     e.preventDefault();
@@ -49,9 +54,43 @@ const DonarLogin = () => {
       // console.log(res);
     }
   };
-  const HandleDSignup = (e) => {
+  const HandleDSignup = async (e) => {
+    if (pass !== cpass) {
+      toast.error("Passwords don't match.");
+      return;
+    }
     e.preventDefault();
-    navigate("/home");
+    let dataObj = {
+      name: full_name,
+      phoneNo: phone_number,
+      email: email,
+      address: address,
+      city: city,
+      role: "don",
+      password: pass,
+    };
+    console.log(dataObj);
+    let ress = await axios
+      .post(
+        "http://localhost:5001/api/auth/createuser",
+        dataObj,
+
+        {
+          headers: { authtoken: localStorage.token },
+        }
+      )
+      .catch((err) => {
+        console.log(err);
+        const errMsg = err.response.data.error;
+        // setLoader(false);
+        toast.error(`${errMsg}`);
+      });
+    if (ress) {
+      // console.log(ress.data.authtoken);
+      localStorage.setItem("token", ress.data.authtoken);
+      toast.success("Signup Successful");
+      navigate("/donarhome");
+    }
   };
 
   return (
@@ -87,17 +126,20 @@ const DonarLogin = () => {
                   <input
                     type="text"
                     name="name"
-                    placeholder="Enter full  name"
+                    placeholder="Enter full name"
                     required
+                    onChange={(e) => setFull_name(e.target.value)}
                   />
                 </div>
                 <div className="input-box">
-                  <span className="details">Username </span>
+                  <span className="details">Phone Number</span>
                   <input
                     type="text"
-                    name="username"
-                    placeholder="Enter a username"
+                    name="phoneNo"
+                    placeholder="Enter mobile number"
+                    pattern="[0-9]{10}"
                     required
+                    onChange={(e) => setPhone_number(e.target.value)}
                   />
                 </div>
                 <div className="input-box">
@@ -107,20 +149,32 @@ const DonarLogin = () => {
                     name="email"
                     placeholder="Enter your email"
                     required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="input-box">
+                  <span className="details">Adderss </span>
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Enter your address"
+                    required
+                    onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
               </div>
               <div className="details2">
                 <div className="input-box">
-                  <span className="details">Phone Number</span>
+                  <span className="details">City</span>
                   <input
                     type="text"
-                    name="phoneNo"
-                    placeholder="Enter your number"
-                    pattern="[0-9]{10}"
+                    name="city"
+                    placeholder="Enter your city"
                     required
+                    onChange={(e) => setCity(e.target.value)}
                   />
                 </div>
+
                 <div className="input-box">
                   <span className="details">Password</span>
                   <input
@@ -128,6 +182,7 @@ const DonarLogin = () => {
                     name="password"
                     placeholder="Enter your password"
                     required
+                    onChange={(e) => setPass(e.target.value)}
                   />
                 </div>
                 <div className="input-box">
@@ -137,6 +192,7 @@ const DonarLogin = () => {
                     name="confrim password"
                     placeholder="Confirm your password"
                     required
+                    onChange={(e) => setCpass(e.target.value)}
                   />
                 </div>
               </div>

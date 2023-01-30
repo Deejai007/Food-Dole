@@ -17,6 +17,7 @@ import VolunteerLoginSignup from "./Pages/VolunteerLoginSIgnup/VolunteerLoginSig
 import DonarLoginSignup from "./Pages/DonarLoginSIgnup/DonarLoginSignup";
 import DonarHome from "./Pages/DonarHome/DonarHome";
 import DonarAddFood from "./Pages/DonarAddFood/DonarAddFood";
+import VolunteerHomePage from "./Pages/VolunteerHomePage/VolunteerHomePage";
 function App() {
   return (
     <>
@@ -60,6 +61,11 @@ function App() {
             <Route exact path={"/donarlogin"} element={<DonarLoginSignup />} />
             <Route exact path={"/donaraddfood"} element={<DonarAddFood />} />
             <Route exact path={"/donarhome"} element={<DonarHome />} />
+            <Route
+              exact
+              path={"/volunteerhome"}
+              element={<VolunteerHomePage />}
+            />
             <Route
               exact
               path={"/volunteerlogin"}

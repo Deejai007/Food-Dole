@@ -1,21 +1,26 @@
-import { React } from "react";
+import { React, useState, useEffect } from "react";
 import { useLocation, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 const Navbar = () => {
   let location = useLocation();
   let navigate = useNavigate();
+  const [role, setRole] = useState("");
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
     toast.success("Logged out successfully");
   };
+  useEffect(() => {
+    console.log(localStorage.role);
+    setRole(localStorage.role);
+  }, [localStorage.role]);
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark light">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">
-            NoteCloud
+            Food Dole
           </Link>
           <button
             className="navbar-toggler"
@@ -37,7 +42,11 @@ const Navbar = () => {
                     : ""
                 } `}
               >
-                <Link className="nav-link " aria-current="page" to="/home">
+                <Link
+                  className="nav-link "
+                  aria-current="page"
+                  to={role == "don" ? "/donarhome" : "/volunteerhome"}
+                >
                   Home
                 </Link>
               </li>

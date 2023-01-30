@@ -144,3 +144,18 @@ form .button input {
   /* transition: all 0.3s ease; */
   background: linear-gradient(135deg, #f77e21, #fad013);
 }
+
+.tacbox {
+  /* display: block; */
+  padding: 1rem;
+  margin: 2rem;
+  border: 3px solid #ddd;
+  background-color: #eee;
+  max-width: 800px;
+}
+
+.TandC input {
+  height: 1.5em;
+  width: 1.5em;
+  vertical-align: middle;
+}

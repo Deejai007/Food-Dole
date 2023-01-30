@@ -77,6 +77,10 @@ const DonarAddFood = () => {
       <Navbar />
       <div id="fillupform">
         <form className="voldetails" onSubmit={handleSubmit}>
+          <h1 centered className="formHead">
+            {" "}
+            Fill food details
+          </h1>
           <div className="user-details">
             <div className="details1">
               <div className="input-box">
@@ -176,9 +180,7 @@ const DonarAddFood = () => {
                     value={quantityUnit}
                     onChange={(e) => {
                       setQuantityUnit(e.target.value);
-                      // console.log(quantityUnit);
                     }}
-                    // defaultValue="unit"
                     style={{
                       backgroundColor: "white",
                       borderRadius: "4px",

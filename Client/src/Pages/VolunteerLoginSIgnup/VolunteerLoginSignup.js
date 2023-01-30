@@ -4,6 +4,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 import "./VolunteerLoginSingup.css";
 import { toast } from "react-toastify";
+
+import axios from "axios";
 const VolunteerLogin = () => {
   let navigate = useNavigate();
 
@@ -18,12 +20,16 @@ const VolunteerLogin = () => {
     document.getElementById("loginform").style.display = "block";
     document.getElementById("btn").style.left = "110px";
   }
+  // Signup Creds
   const [org_name, setOrg_name] = useState("");
-  const [phone_number, setPhone_number] = useState("");
-  const [id_no, setId_no] = useState("");
+  const [name, setName] = useState("");
   const [email, setemail] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [phone_number, setPhone_number] = useState("");
   const [pass, setPass] = useState("");
   const [cpass, setCpass] = useState("");
+  // Login Creds
   const [creds, setCreds] = useState({ email: "", password: "" });
   const HandleVLogin = async (e) => {
     e.preventDefault();
@@ -37,14 +43,49 @@ const VolunteerLogin = () => {
     });
     let res = await response.json();
     if (res.success) {
-      console.log(res);
+      // console.log(res);
       localStorage.setItem("token", res.authtoken);
-      navigate("/home");
+
+      navigate("/volunteerhome");
     } else toast.error("Error");
   };
-  const HandleVSignup = (e) => {
+  const HandleVSignup = async (e) => {
     e.preventDefault();
-    navigate("/home");
+    if (pass !== cpass) {
+      toast.error("Passwords don't match!");
+      return;
+    }
+    let obj = {
+      organisationName: org_name,
+      name: name,
+      email: email,
+      address: address,
+      city: city,
+      phoneNo: phone_number,
+      role: "Vol",
+      password: pass,
+    };
+    // console.log(obj);
+    let ress = await axios
+      .post(
+        "http://localhost:5001/api/auth/createuser",
+        obj,
+
+        {
+          headers: { authtoken: localStorage.token },
+        }
+      )
+      .catch((err) => {
+        console.log(err);
+        const errMsg = err.response.data.error;
+        // setLoader(false);
+        toast.error(`${errMsg}`);
+      });
+    if (ress) {
+      // console.log(ress.data.authtoken);
+      localStorage.setItem("token", ress.data.authtoken);
+      navigate("/volunteerhome");
+    }
   };
   return (
     <div>
@@ -87,15 +128,14 @@ const VolunteerLogin = () => {
                   />
                 </div>
                 <div className="input-box">
-                  <span className="details">Id Card Number </span>
+                  <span className="details">Your Name </span>
                   <input
                     type="text"
-                    name="idNumber"
-                    placeholder="xxxx xxxx xxxx xxxx"
+                    name="volunteerName"
+                    placeholder="Enter your name"
                     required
-                    pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"
                     onChange={(e) => {
-                      setId_no(e.target.value);
+                      setName(e.target.value);
                     }}
                   />
                 </div>
@@ -111,8 +151,28 @@ const VolunteerLogin = () => {
                     }}
                   />
                 </div>
+                <div className="input-box">
+                  <span className="details">Adderss </span>
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Enter your address"
+                    onChange={(e) => setAddress(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
               <div className="details2">
+                <div className="input-box">
+                  <span className="details">City</span>
+                  <input
+                    type="text"
+                    name="city"
+                    placeholder="Enter your city"
+                    onChange={(e) => setCity(e.target.value)}
+                    required
+                  />
+                </div>
                 <div className="input-box">
                   <span className="details">Phone Number</span>
                   <input
@@ -152,6 +212,13 @@ const VolunteerLogin = () => {
                 </div>
               </div>
             </div>
+            <div className="TandC tacbox">
+              <input id="checkbox" required type="checkbox" />
+              <label htmlFor="checkbox">
+                I agree to the terms and conditions as set out by the user
+                agreement.
+              </label>
+            </div>
 
             <div className="button">
               <input type="submit" name="button" value="Register" />
@@ -170,7 +237,7 @@ const VolunteerLogin = () => {
                   placeholder="example@gmail.com"
                   onChange={(e) => {
                     setCreds({ ...creds, [e.target.name]: e.target.value });
-                    console.log(creds);
+                    // console.log(creds);
                   }}
                 />
               </div>
@@ -182,7 +249,7 @@ const VolunteerLogin = () => {
                   placeholder="Enter your Password"
                   onChange={(e) => {
                     setCreds({ ...creds, [e.target.name]: e.target.value });
-                    console.log(creds);
+                    // console.log(creds);
                   }}
                 />
               </div>

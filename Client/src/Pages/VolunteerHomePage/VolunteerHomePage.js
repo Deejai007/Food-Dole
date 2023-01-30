@@ -5,12 +5,12 @@ import Notes from "../../components/Notes";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "./../../components/Footer/Footer";
 import { toast } from "react-toastify";
-import "./DonarHome.css";
+import "./VolunteerHomePage.css";
 import { useNavigate } from "react-router-dom";
-const DonarHome = () => {
+import axios from "axios";
+const VolunteerHomePage = () => {
   const navigate = useNavigate();
   const [userProfile, setuserProfile] = useState();
-
   const getUser = async () => {
     const response = await fetch(`http://localhost:5001/api/auth/getuser`, {
       method: "POST",
@@ -23,45 +23,32 @@ const DonarHome = () => {
     const jsn = await response.json();
     console.log(jsn);
     localStorage.setItem("donarName", jsn.name);
-    localStorage.setItem("role", jsn.role);
-    // console.log(jsn.role);
     toast.success(`Welcome, ${jsn.name}!`);
     setuserProfile(jsn);
-
     // console.log(json);
   };
-  useEffect(() => {
-    if (!localStorage.donarName) {
-      getUser();
+  const getFood = async () => {
+    const res = await axios
+      .get("http://localhost:5001/api/food/fetchallfood", {
+        headers: {
+          authtoken: localStorage.token,
+          "Content-Type": "application/json",
+        },
+      })
+      .catch((err) => console.log(err));
+    if (res) {
+      console.log(res);
     }
+  };
+  useEffect(() => {
+    if (!localStorage.donarName) getUser();
+    getFood();
   }, []);
 
   return (
     <>
       <Navbar />
-      <section className="dlmain">
-        <div className="dlleft">
-          <p className="dlquote">
-            "Feeding the hungry is not just a duty, it is a privilege. Let's
-            work together to end hunger in our community and give hope to those
-            in need. Your donation can make a difference today."
-          </p>
-          <button
-            className="dldonate"
-            onClick={() => {
-              navigate("/donaraddfood");
-            }}
-          >
-            Donate Now!
-          </button>
-        </div>
-        <div className="dlright">
-          <img
-            src="images\man-helping-poor-homeless-man-with-food-guy-giving-dinner-beggar-poverty-near-trash-bins-social-inequality-aid-society_575670-1667-removebg-preview.png"
-            alt=""
-          />
-        </div>
-      </section>
+      <section className="vlmain">Vol</section>
       <section className="ftco-section">
         <div className="container">
           <div className="row">
@@ -246,4 +233,4 @@ const DonarHome = () => {
   );
 };
 
-export default DonarHome;
+export default VolunteerHomePage;
