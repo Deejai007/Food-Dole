@@ -1,0 +1,15 @@
+.mainlist {
+  display: grid;
+  grid-template-columns: auto auto;
+  width: 100vw;
+  max-width: 950px;
+  margin: auto;
+  column-gap: 0rem;
+  row-gap: 0.4rem;
+}
+.headlist {
+  margin-top: 0;
+  padding-top: 1rem;
+  margin-bottom: 0;
+  padding-bottom: 1rem;
+}

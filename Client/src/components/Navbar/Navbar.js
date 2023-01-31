@@ -19,7 +19,10 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark light">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/home">
+          <Link
+            className="navbar-brand"
+            to={role == "don" ? "/donarhome" : "/volunteerhome"}
+          >
             Food Dole
           </Link>
           <button

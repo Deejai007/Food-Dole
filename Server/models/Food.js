@@ -48,4 +48,5 @@ const FoodSchema = new Schema({
     default: Date.now,
   },
 });
+// FoodSchema.createIndex({ useBefore: 1 }, { expireAfterSeconds: 0 });
 module.exports = mongoose.model("food", FoodSchema);

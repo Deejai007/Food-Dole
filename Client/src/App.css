@@ -8,3 +8,7 @@ input[type="number"]::-webkit-outer-spin-button {
 :any-link {
   color: rgba(255, 255, 255, 0.9);
 }
+p {
+  margin: 0;
+  padding: 0;
+}

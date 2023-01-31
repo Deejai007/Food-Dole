@@ -2,6 +2,7 @@ const express = require("express");
 const fetchuser = require("../middleware/fetchUser");
 const Food = require("../models/Food");
 const { body, validationResult } = require("express-validator");
+const { createIndexes } = require("../models/Food");
 const router = express.Router();
 
 // ROUTE 1:Get all the notes of the user GET "/api/notes/fetchallnotes"-login required
@@ -9,12 +10,14 @@ const router = express.Router();
 router.get("/fetchallfood", fetchuser, async (req, res) => {
   try {
     const foods = await Food.find();
+
     res.json(foods);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Some Error occured in create food");
   }
 });
+
 // ROUTE 2:Add a new  note of the user POST "/api/notes/addnote"-login required
 router.post("/addfood", fetchuser, async (req, res) => {
   const {
