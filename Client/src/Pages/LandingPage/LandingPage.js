@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   let navigate = useNavigate();
   return (
-    <div>
+    <div className="dj-heroo">
       <Navbar />
       <section className="s-landing">
         <div className="lhs">

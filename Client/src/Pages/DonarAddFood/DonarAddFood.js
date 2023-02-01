@@ -29,6 +29,9 @@ const DonarAddFood = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log("d");
+    const { files } = document.querySelector('input[type="file"]');
+    console.log(files[0]);
+    // console.log("d");
     const obj = {
       name: name,
       description: description,
@@ -212,6 +215,19 @@ const DonarAddFood = () => {
                 ></input>
               </div>
             </div>
+          </div>
+          <div className="input-box">
+            <span className="details">Consume Before</span>
+
+            <input
+              type="file"
+              id="imageurl"
+              name="imageurl"
+              onChange={(e) => {
+                // setUseBefore(e.target.value);
+                // console.log(useBefore);
+              }}
+            ></input>
           </div>
 
           <div className="button">

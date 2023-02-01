@@ -75,17 +75,6 @@ const Navbar = () => {
                   <i className="fa fa-user mx-2"></i>
                 </a>
                 <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-
                   <button
                     className="btn mx-1 text-warning "
                     onClick={handleLogout}

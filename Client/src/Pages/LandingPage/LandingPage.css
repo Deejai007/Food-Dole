@@ -127,7 +127,7 @@ h1 {
   text-align: center;
 }
 
-ul li i::after {
+.dj-heroo ul li i::after {
   content: "";
   background: black;
   height: 5px;
