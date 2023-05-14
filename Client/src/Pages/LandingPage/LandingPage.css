@@ -1,0 +1,279 @@
+.s-landing {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  margin: auto;
+  width: 100vw;
+  max-width: 1600px;
+}
+.lhs {
+  width: 50%;
+}
+.lhs h1 {
+  padding: 10%;
+  font-size: 1.7rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.rhs {
+  width: 50%;
+}
+.rhs img {
+  mix-blend-mode: multiply;
+  /* padding: 5%; */
+  width: 90%;
+  max-width: 550px;
+
+  margin: auto;
+  margin-top: 1rem;
+  border-radius: 1rem;
+}
+
+@media only screen and (max-width: 696px) {
+  .s-landing {
+    flex-direction: column;
+  }
+  .lhs {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rhs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
+  .rhs img {
+    /* width: 90%; */
+    /* max-width: 550px; */
+    /* margin: auto; */
+    border-radius: 1rem;
+  }
+}
+.divide-landing {
+  width: 80vw;
+  margin: 1rem auto;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.mid {
+  margin: auto;
+  margin-top: 4rem;
+}
+
+.steps-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mid .steps {
+  margin-left: 12%;
+  align-items: center;
+}
+.steps img {
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 30px;
+}
+
+#three img {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 10px;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+}
+
+ul li {
+  list-style-type: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+ul li p {
+  width: 200px;
+  margin: 40px 10px 100px 0;
+  transform: translateX(-40%);
+}
+
+.icons {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  padding: 60px;
+  font-weight: bold;
+}
+
+.icons i {
+  padding: 5px;
+  height: 40px;
+  width: 40px;
+  color: white;
+  background: rgb(82, 78, 78);
+  border-radius: 50%;
+  margin-left: 2px;
+  text-align: center;
+}
+
+.dj-heroo ul li i::after {
+  content: "";
+  background: black;
+  height: 5px;
+  width: 100%;
+  background: rgb(82, 78, 78);
+  display: block;
+  position: absolute;
+  left: 30px;
+  top: 133px;
+  /* z-index: -1; */
+}
+#five i::after {
+  height: 0;
+}
+
+@media screen and (max-width: 1030px) {
+  .mid .steps {
+    margin-left: 30%;
+  }
+  ul {
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  ul li {
+    flex-direction: row;
+  }
+  ul li i::after {
+    height: 100%;
+    width: 5px;
+    background: rgb(82, 78, 78);
+    left: 88px;
+    top: 38px;
+    /* z-index: -1; */
+  }
+  #three img {
+    width: 60px;
+  }
+  ul li p {
+    transform: none;
+  }
+  .steps img {
+    margin-right: 2%;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  .mid .steps {
+    margin-left: 5%;
+  }
+  ul li i::after {
+    left: 88px;
+  }
+  .steps img {
+    margin-right: 2%;
+  }
+  #two img {
+    margin-right: 3%;
+  }
+}
+
+@media screen and (max-width: 370px) {
+  ul li i::after {
+    left: 84px;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  ul li i::after {
+    left: 82px;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  ul li i::after {
+    left: 80px;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  ul li i::after {
+    left: 78px;
+  }
+  #two img {
+    margin-right: 4%;
+  }
+}
+
+@media screen and (max-width: 288px) {
+  ul li i::after {
+    left: 75px;
+  }
+  #two img {
+    margin-left: 0;
+  }
+}
+/* .ftco-animate {
+  } */
+.action-section {
+  margin: 1rem;
+}
+.be-a-col {
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.264);
+  /* height: 14rem; */
+  /* width: 40vw; */
+  background-color: rgb(255, 183, 49);
+  margin: 1rem;
+}
+.be-don {
+  /* margin-bottom: 1rem; */
+}
+.nav-btn-1,
+.nav-btn-2 {
+  border: 1px solid black;
+  background-color: rgb(255, 204, 109);
+  margin-bottom: 0.5rem;
+}
+@media only screen and (max-width: 696px) {
+  .s-landing {
+    flex-direction: column;
+  }
+  .lhs {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rhs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+  }
+  .rhs img {
+    /* width: 90%; */
+    /* max-width: 550px; */
+    /* margin: auto; */
+    border-radius: 1rem;
+  }
+  .steps-section {
+    display: inherit;
+  }
+}
+@media only screen and (min-width: 696px) {
+  .nav-btn-1 {
+    margin-top: 1.5rem;
+  }
+}
